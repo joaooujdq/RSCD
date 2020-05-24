@@ -78,6 +78,7 @@
 
       (function() {
         'use strict';
+
         /* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode */
 
         window.addEventListener('load', function() {
@@ -148,20 +149,49 @@
               */
 
             form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
+              let nameRegex = /\s{2}|\d/
+              if (form.checkValidity() === false ) {
+
+                /* CheckValidity() returns true if an input element contains valid data. */
+
                 event.preventDefault();
+
+                /* The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. */
+
                 event.stopPropagation();
+
+                /* The stopPropagation() method prevents propagation of the same event from being called.
+
+                Propagation means bubbling up to parent elements or capturing down to child elements. */
+                //event.setCustomValidity("Elemento invalido")
+                
+              }else if(nameRegex.test(document.getElementById("validationCustom01").value) === true ){
+
+                Element.setCustomValidity("Elemento invalido")
+
               }
+
               form.classList.add('was-validated');
             }, false);
+
+            /* The boolean param from addEventListener:  A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase.
+
+              Possible values:
+              true - The event handler is executed in the capturing phase
+              false- Default. The event handler is executed in the bubbling phase
+
+              https://javascript.info/bubbling-and-capturing
+
+               */
           });
         }, false);
       })();
+
+
       </script>
 
     
 
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
