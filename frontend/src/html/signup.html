@@ -1,215 +1,288 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="en" >
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Registro do conta</title>
+  <title>Registro do conta</title>
 
-    <link href="../css/signup.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet"> 
-   
+  <link href="../css/signup.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
-  </head>
-  <body>
+  <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript">	
+		
+		$(document).ready(function () {
+		
+			$.getJSON('estados_cidades.json', function (data) {
 
-      <h1> Cadastro de Desenvolvedor</h1>
+				var items = [];
+				var options = '<option value="">Escolha um estado</option>';	
 
-      <div class="alert alert-danger" role="alert" id="errorMsg" >
-        Erro! Dados inválidos.
+				$.each(data, function (key, val) {
+					options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+				});					
+				$("#estados").html(options);				
+				
+				$("#estados").change(function () {				
+				
+					var options_cidades = '';
+					var str = "";					
+					
+					$("#estados option:selected").each(function () {
+						str += $(this).text();
+					});
+					
+					$.each(data, function (key, val) {
+						if(val.nome == str) {							
+							$.each(val.cidades, function (key_city, val_city) {
+								options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+							});							
+						}
+					});
+
+					$("#cidades").html(options_cidades);
+					
+				}).change();		
+			
+			});
+		
+		});
+		
+  </script>	
+  
+</head>
+
+<body>
+
+  <h1> Cadastro de Desenvolvedor</h1>
+
+  <div class="alert alert-danger" role="alert" id="errorMsg">
+    Erro! Dados inválidos.
+  </div>
+
+  <form class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+
+        <label for="validationCustom01">Primeiro nome</label>
+        <input type="text" class="form-control" id="validationCustom01"  attr="none" required>
+
       </div>
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom02">Sobrenome</label>
+        <input type="text" class="form-control" id="validationCustom02"  attr="none" required>
 
-    <form class="needs-validation" novalidate>
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            
-            <label for="validationCustom01">Primeiro nome</label>
-            <input type="text" class="form-control" id="validationCustom01" value="João" required>
-            
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom02">Sobrenome</label>
-            <input type="text" class="form-control" id="validationCustom02" value="Silva" required>
-            
-          </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom03">Cidade</label>
+        <select class="custom-select" id="cidades" attr="none" required>
+          <option selected disabled value="">Escolha...</option>
+          <option value="">Selecione</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, digite uma cidade válida.
         </div>
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom03">Cidade</label>
-            <input type="text" class="form-control" id="validationCustom03" required>
-            <div class="invalid-feedback">
-              Por favor, digite uma cidade válida.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="validationCustom04">Estado</label>
-            <select class="custom-select" id="validationCustom04" required>
-              <option selected disabled value="">Escolha...</option>
-              <option>...</option>
-            </select>
-            <div class="invalid-feedback">
-              Por favor, selecione um estado válido.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="validationCustom05">CEP</label>
-            <input type="text" class="form-control" id="validationCustom05" required>
-            <div class="invalid-feedback">
-              Por favor, digite um CEP válido.
-            </div>
-          </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom04">Estado</label>
+        <select class="custom-select" id="estados" attr="none" required>
+          <option selected disabled value="">Escolha...</option>
+          <option value="">Selecione</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, selecione um estado válido.
         </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-            <label class="form-check-label" for="invalidCheck">
-              Concordo com os termos e condições.
-            </label>
-            <div class="invalid-feedback">
-              É preciso concordar com os termos e condições para prosseguir.
-            </div>
-          </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom05">CEP</label>
+        <input type="text" class="form-control" id="validationCustom05" attr="none" required>
+        <div class="invalid-feedback">
+          Por favor, digite um CEP válido.
         </div>
-        <button class="btn btn-primary" type="submit">Cadastrar</button>
-      </form>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+          Concordo com os termos e condições.
+        </label>
+        <div class="invalid-feedback">
+          É preciso concordar com os termos e condições para prosseguir.
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Cadastrar</button>
+  </form>
 
-      <script>
-
-
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-
-      /* Em javascript, podemos definir escopos colocando funções entre parenteses e isolar funções internas de exposição interna e não precisamos nos 
-      preocupar com conflitos externos, isso também vale para variáveis dentro do escopo. */
-
-
-      (function() {
-        'use strict';
-
-        /* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode */
-
-        window.addEventListener('load', function() {
-
-            /* The onload event occurs when an object has been loaded.
-
-            onload (nesse caso, é referido como 'load') is most often used within the <body> element to execute a script once a web page 
-            has completely loaded all content (including images, script files, CSS files, etc.). */
-
-              /* a função addEventListener(evento, função()) executa função() quando o evento passado por parametro acontece. */  
+  <script>
 
 
-              /* The window object represents an open window in a browser.
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
 
-                If a document contain frames (<iframe> tags), the browser creates one window object for the HTML document, 
-                
-                and one additional window object for each frame. */
-
-
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    /* Em javascript, podemos definir escopos colocando funções entre parenteses e isolar funções internas de exposição interna e não precisamos nos 
+    preocupar com conflitos externos, isso também vale para variáveis dentro do escopo. */
 
 
-          var forms = document.getElementsByClassName('needs-validation');
+    (function () {
+      'use strict';
 
-                /* When an HTML document is loaded into a web browser, it becomes a document object.
+      /* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode */
 
-                The document object is the root node of the HTML document. */
+      window.addEventListener('load', function () {
 
+        /* The onload event occurs when an object has been loaded.
 
-                /* 
+        onload (nesse caso, é referido como 'load') is most often used within the <body> element to execute a script once a web page 
+        has completely loaded all content (including images, script files, CSS files, etc.). */
 
-            The element.getElementsByTagName() method returns a collection of an elements's child elements with the specified 
-            tag name, as a NodeList object. */
-
-          // Loop over them and prevent submission
-
-          var validation = Array.prototype.filter.call(forms, function(form) {
+        /* a função addEventListener(evento, função()) executa função() quando o evento passado por parametro acontece. */
 
 
-              /* Quando queremos usar uma função que é usada com arrays, mas não temos um array para fazer "meuArray.filter.call()", usamos
-              Array.prototype().
-              
-              
-              The Object.prototype is on the top of the prototype inheritance (herança) chain.
-              ex: Array objects inherit from Array.prototype   
-              */
+        /* The window object represents an open window in a browser.
+
+          If a document contain frames (<iframe> tags), the browser creates one window object for the HTML document, 
+          
+          and one additional window object for each frame. */
 
 
-              /* With the call() method, you can write a method that can be used on different objects. 
-              
-              ex:
-              var person = {
-                fullName: function() {
-                return this.firstName + " " + this.lastName;
-                }
-                }
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
-                var person1 = {
-                firstName:"John",
-                lastName: "Doe"
-                }
-                var person2 = {
-                firstName:"Mary",
-                lastName: "Doe"
-                }
-                person.fullName.call(person1);  // Will return "John Doe" 
-              
-              */
 
-            form.addEventListener('submit', function(event) {
-              let nameRegex = /\s{2}|\d/
-              if (form.checkValidity() === false ) {
+        var forms = document.getElementsByClassName('needs-validation');
 
-                /* CheckValidity() returns true if an input element contains valid data. */
+        /* When an HTML document is loaded into a web browser, it becomes a document object.
 
-                event.preventDefault();
+        The document object is the root node of the HTML document. */
 
-                /* The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. */
+        /* 
 
-                event.stopPropagation();
+         The element.getElementsByTagName() method returns a collection of an elements's child elements with the specified 
+        tag name, as a NodeList object. */
 
-                /* The stopPropagation() method prevents propagation of the same event from being called.
+        // Loop over them and prevent submission
 
-                Propagation means bubbling up to parent elements or capturing down to child elements. */
-                //event.setCustomValidity("Elemento invalido")
+        var validation = Array.prototype.filter.call(forms, function (form) {
 
-                document.getElementById("errorMsg").style.display = "block";
-                
+
+          /* Quando queremos usar uma função que é usada com arrays, mas não temos um array para fazer "meuArray.filter.call()", usamos
+          Array.prototype().
+          
+          
+          The Object.prototype is on the top of the prototype inheritance (herança) chain.
+          ex: Array objects inherit from Array.prototype   
+          */
+
+
+          /* With the call() method, you can write a method that can be used on different objects. 
+          
+          ex:
+          var person = {
+            fullName: function() {
+            return this.firstName + " " + this.lastName;
+            }
+            }
+
+            var person1 = {
+            firstName:"John",
+            lastName: "Doe"
+            }
+            var person2 = {
+            firstName:"Mary",
+            lastName: "Doe"
+            }
+            person.fullName.call(person1);  // Will return "John Doe" 
+          
+          */
+
+          form.addEventListener('submit', function (event) {
+            let nameRegex = /(\s{2}|\d)|\s$/
+            if (form.checkValidity() === false) { //verifica se os componentes que são requeridos estão preenchidos
+
+              cancelEvent(event)
+              document.getElementById("form1").setAttribute("attr", "invalid")
+
+            } else {
+
+              if (nameRegex.test(document.getElementById("validationCustom01").value) === true ||
+                nameRegex.test(document.getElementById("validationCustom02").value) === true) {
+
+                cancelEvent(event)
+
+                document.getElementById("validationCustom01").setAttribute("attr", "invalid")
+                document.getElementById("validationCustom02").setAttribute("attr", "invalid")
               }
-              if(nameRegex.test(document.getElementById("validationCustom01").value) === true){
-                
-              }
-                
 
 
-              //form.classList.add('was-validated');
-            }, false);
-
-            
-
-            /* The boolean param from addEventListener:  A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase.
-
-              Possible values:
-              true - The event handler is executed in the capturing phase
-              false- Default. The event handler is executed in the bubbling phase
-
-              https://javascript.info/bubbling-and-capturing
-
-               */
-          });
-        }, false);
-      })();
 
 
-      </script>
 
-    
+            }
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
+            //form.classList.add('was-validated');
+
+          }, false);
+
+          /* The boolean param from addEventListener:  A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase.
+
+            Possible values:
+            true - The event handler is executed in the capturing phase
+            false- Default. The event handler is executed in the bubbling phase
+
+            https://javascript.info/bubbling-and-capturing
+
+             */
+
+        });
+      }, false);
+
+      function cancelEvent(event) {
+
+        /* CheckValidity() returns true if an input element contains valid data. */
+
+        event.preventDefault();
+
+        /* The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. */
+
+        event.stopPropagation();
+
+        /* The stopPropagation() method prevents propagation of the same event from being called.
+        Propagation means bubbling up to parent elements or capturing down to child elements. */
+
+        document.getElementById("errorMsg").style.display = "block"
+
+      }
+
+    }
+    )()
+
+
+
+
+
+  </script>
+
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

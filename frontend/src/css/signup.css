@@ -13,14 +13,23 @@ h1{
     text-align: center;
     margin-bottom: 75px;
     background-color:  rgb(166, 199, 183);
-}
 
-input:valid{
-    display: hidden;
-    border: 1px solid #00FF00;
-}
-
-input:invalid{
     
-    border: 1px solid #ff002b;
 }
+
+input[attr="valid"]{
+	border: 1px solid green;
+}
+input[attr="invalid"] {
+	border: 1px solid red;
+}
+
+input[attr="none"]{
+	border: 1px solid blue;
+}
+
+select[attr="none"]{
+	border: 1px solid blue;
+}
+
+
