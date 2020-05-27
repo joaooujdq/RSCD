@@ -17,9 +17,6 @@ h1{
     
 }
 
-input[attr="valid"]{
-	border: 1px solid green;
-}
 input[attr="invalid"] {
 	border: 1px solid red;
 }
@@ -31,5 +28,23 @@ input[attr="none"]{
 select[attr="none"]{
 	border: 1px solid blue;
 }
+
+select[attr="invalid"] {
+	border: 1px solid red;
+}
+
+#invalidCep{
+    display: none;
+}
+#invalidName1{
+    display: none;
+}
+#invalidName2{
+    display: none;
+}
+#invalidCheck{
+    display: none;
+}
+
 
 

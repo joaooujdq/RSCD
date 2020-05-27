@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 
 <head>
 
@@ -15,48 +15,8 @@
   <link href="../css/signup.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
-  <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-	<script type="text/javascript">	
-		
-		$(document).ready(function () {
-		
-			$.getJSON('estados_cidades.json', function (data) {
+  <script language="JavaScript" type="text/javascript" src="../js/cidades-estados-1.4-utf8.js"></script>
 
-				var items = [];
-				var options = '<option value="">Escolha um estado</option>';	
-
-				$.each(data, function (key, val) {
-					options += '<option value="' + val.nome + '">' + val.nome + '</option>';
-				});					
-				$("#estados").html(options);				
-				
-				$("#estados").change(function () {				
-				
-					var options_cidades = '';
-					var str = "";					
-					
-					$("#estados option:selected").each(function () {
-						str += $(this).text();
-					});
-					
-					$.each(data, function (key, val) {
-						if(val.nome == str) {							
-							$.each(val.cidades, function (key_city, val_city) {
-								options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-							});							
-						}
-					});
-
-					$("#cidades").html(options_cidades);
-					
-				}).change();		
-			
-			});
-		
-		});
-		
-  </script>	
-  
 </head>
 
 <body>
@@ -72,12 +32,19 @@
       <div class="col-md-6 mb-3">
 
         <label for="validationCustom01">Primeiro nome</label>
-        <input type="text" class="form-control" id="validationCustom01"  attr="none" required>
+        <input type="text" class="form-control" id="validationCustom01" attr="none" required>
+        <div class="invalid-feedback" id="invalidName1">
+          Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
+        </div>
+
 
       </div>
       <div class="col-md-6 mb-3">
         <label for="validationCustom02">Sobrenome</label>
-        <input type="text" class="form-control" id="validationCustom02"  attr="none" required>
+        <input type="text" class="form-control" id="validationCustom02" attr="none" required>
+        <div class="invalid-feedback" id="invalidName2">
+          Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
+        </div>
 
       </div>
     </div>
@@ -85,38 +52,31 @@
       <div class="col-md-6 mb-3">
         <label for="validationCustom03">Cidade</label>
         <select class="custom-select" id="cidades" attr="none" required>
-          <option selected disabled value="">Escolha...</option>
-          <option value="">Selecione</option>
+          <option value="">Escolha uma cidade</option>
         </select>
-        <div class="invalid-feedback">
-          Por favor, digite uma cidade válida.
-        </div>
+
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationCustom04">Estado</label>
         <select class="custom-select" id="estados" attr="none" required>
-          <option selected disabled value="">Escolha...</option>
-          <option value="">Selecione</option>
+          <option value="">Escolha uma estado</option>
         </select>
-        <div class="invalid-feedback">
-          Por favor, selecione um estado válido.
-        </div>
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationCustom05">CEP</label>
         <input type="text" class="form-control" id="validationCustom05" attr="none" required>
-        <div class="invalid-feedback">
-          Por favor, digite um CEP válido.
+        <div class="invalid-feedback" id="invalidCep">
+          Por favor, digite o CEP usando apenas números.
         </div>
       </div>
     </div>
     <div class="form-group">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
+        <input class="form-check-input" type="checkbox" value="" id="checkbox1" required>
+        <label class="form-check-label" for="checkbox1">
           Concordo com os termos e condições.
         </label>
-        <div class="invalid-feedback">
+        <div class="invalid-feedback" id="invalidCheck">
           É preciso concordar com os termos e condições para prosseguir.
         </div>
       </div>
@@ -137,6 +97,12 @@
       'use strict';
 
       /* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode */
+
+      new dgCidadesEstados({
+        cidade: document.getElementById('cidades'),
+        estado: document.getElementById('estados')
+      })
+
 
       window.addEventListener('load', function () {
 
@@ -205,28 +171,45 @@
           */
 
           form.addEventListener('submit', function (event) {
-            let nameRegex = /(\s{2}|\d)|\s$/
-            if (form.checkValidity() === false) { //verifica se os componentes que são requeridos estão preenchidos
+            let nameRegex = /(\s{2}|\d)|(\s$|^\s)|^\s*$/
+            let cepRegex = /\w/
+            //verifica se há dois espaços em branco seguidos, numeros, espaço em branco no final e no inicio, e se esta vazio
+            
+              if (nameRegex.test(document.getElementById("validationCustom01").value) === true) {
 
-              cancelEvent(event)
-              document.getElementById("form1").setAttribute("attr", "invalid")
+                cancelEvent(event, "validationCustom01")
+                document.getElementById("invalidName1").style.display = "block"
 
-            } else {
+              }
+              if (nameRegex.test(document.getElementById("validationCustom02").value) === true) {
 
-              if (nameRegex.test(document.getElementById("validationCustom01").value) === true ||
-                nameRegex.test(document.getElementById("validationCustom02").value) === true) {
+                cancelEvent(event, "validationCustom02")
+                document.getElementById("invalidName2").style.display = "block"
 
-                cancelEvent(event)
+              }
+              if (document.getElementById("estados").value == "") {
 
-                document.getElementById("validationCustom01").setAttribute("attr", "invalid")
-                document.getElementById("validationCustom02").setAttribute("attr", "invalid")
+                cancelEvent(event, "estados")
+
               }
 
+              if (document.getElementById("cidades").value == "") {
 
+                cancelEvent(event, "cidades")
 
+              }
 
+              if (isCEP(document.getElementById("validationCustom05").value) == false ) {
 
-            }
+                cancelEvent(event, "validationCustom05")
+                document.getElementById("invalidCep").style.display = "block"
+
+              } 
+
+              if(document.getElementById("checkbox1").checked == false){
+                cancelEvent(event, "checkbox1")
+                document.getElementById("invalidCheck").style.display = "block"
+              }
 
             //form.classList.add('was-validated');
 
@@ -245,7 +228,7 @@
         });
       }, false);
 
-      function cancelEvent(event) {
+      function cancelEvent(event, id) {
 
         /* CheckValidity() returns true if an input element contains valid data. */
 
@@ -260,9 +243,32 @@
 
         document.getElementById("errorMsg").style.display = "block"
 
+        document.getElementById(id).setAttribute("attr", "invalid")
+      }
+
+      function trim(strTexto) {
+        // Substitúi os espaços vazios no inicio e no fim da string por vazio.
+        return strTexto.replace(/^s+|s+$/g, '');
+      }
+
+      // Função para validação de CEP.
+      function isCEP(strCEP) {
+        // Caso o CEP não esteja nesse formato ele é inválido!
+
+        while (strCEP.indexOf(" ") != -1) {
+          strCEP = strCEP.replace(" ", "")
+        }
+
+        let objER = /^[0-9]{8}$/;
+
+        if (objER.test(strCEP))
+          return true;
+        else
+          return false;
       }
 
     }
+
     )()
 
 
