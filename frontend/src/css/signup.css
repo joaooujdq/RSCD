@@ -3,48 +3,19 @@ body{
     background-color: #f5f5f5;
 }
 
-#errorMsg{
-    display: none;
-    margin-top: 40px;
-}
-
 h1{
     font-family: 'DM Mono', monospace;
     text-align: center;
-    margin-bottom: 75px;
-    background-color:  rgb(166, 199, 183);
-
-    
+    background-color:  rgb(136, 201, 169);
+    font-size: 60px
 }
 
 input[attr="invalid"] {
 	border: 1px solid red;
 }
 
-input[attr="none"]{
-	border: 1px solid blue;
-}
-
-select[attr="none"]{
-	border: 1px solid blue;
-}
-
-select[attr="invalid"] {
-	border: 1px solid red;
-}
-
-#invalidCep{
-    display: none;
-}
-#invalidName1{
-    display: none;
-}
-#invalidName2{
-    display: none;
-}
-#invalidCheck{
-    display: none;
-}
 
 
-
+form{
+    margin-top: 75px;
+}

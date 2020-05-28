@@ -1,294 +1,91 @@
 <!doctype html>
 <html lang="en">
+  <head>
 
-<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link href="../css/signup.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Cadastro - RSCD</title>
+  </head>
+  <body>
+    <h1>Cadastro de Usuário</h1>
 
-  <title>Registro do conta</title>
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
 
-  <link href="../css/signup.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+            <div class="col-md-6 mb-3">
+                <label for="inputUserId">Nome de usuário</label>
+                <input type="text" class="form-control" id="inputUserId" attr="none" required maxlength="20" minlength="8">
+              </div>
+            <div class="col-md-6 mb-3">
+                <label for="inputEmail" >Email</label>
+                  <input type="email" class="form-control" id="inputEmail1" attr="none" maxlength="40">
 
-  <script language="JavaScript" type="text/javascript" src="../js/cidades-estados-1.4-utf8.js"></script>
-
-</head>
-
-<body>
-
-  <h1> Cadastro de Desenvolvedor</h1>
-
-  <div class="alert alert-danger" role="alert" id="errorMsg">
-    Erro! Dados inválidos.
-  </div>
-
-  <form class="needs-validation" novalidate>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-
-        <label for="validationCustom01">Primeiro nome</label>
-        <input type="text" class="form-control" id="validationCustom01" attr="none" required>
-        <div class="invalid-feedback" id="invalidName1">
-          Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
-        </div>
-
-
-      </div>
-      <div class="col-md-6 mb-3">
-        <label for="validationCustom02">Sobrenome</label>
-        <input type="text" class="form-control" id="validationCustom02" attr="none" required>
-        <div class="invalid-feedback" id="invalidName2">
-          Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
-        </div>
-
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="validationCustom03">Cidade</label>
-        <select class="custom-select" id="cidades" attr="none" required>
-          <option value="">Escolha uma cidade</option>
-        </select>
-
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom04">Estado</label>
-        <select class="custom-select" id="estados" attr="none" required>
-          <option value="">Escolha uma estado</option>
-        </select>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom05">CEP</label>
-        <input type="text" class="form-control" id="validationCustom05" attr="none" required>
-        <div class="invalid-feedback" id="invalidCep">
-          Por favor, digite o CEP usando apenas números.
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkbox1" required>
-        <label class="form-check-label" for="checkbox1">
-          Concordo com os termos e condições.
-        </label>
-        <div class="invalid-feedback" id="invalidCheck">
-          É preciso concordar com os termos e condições para prosseguir.
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" type="submit">Cadastrar</button>
-  </form>
-
-  <script>
-
-
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-
-    /* Em javascript, podemos definir escopos colocando funções entre parenteses e isolar funções internas de exposição interna e não precisamos nos 
-    preocupar com conflitos externos, isso também vale para variáveis dentro do escopo. */
-
-
-    (function () {
-      'use strict';
-
-      /* https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode */
-
-      new dgCidadesEstados({
-        cidade: document.getElementById('cidades'),
-        estado: document.getElementById('estados')
-      })
-
-
-      window.addEventListener('load', function () {
-
-        /* The onload event occurs when an object has been loaded.
-
-        onload (nesse caso, é referido como 'load') is most often used within the <body> element to execute a script once a web page 
-        has completely loaded all content (including images, script files, CSS files, etc.). */
-
-        /* a função addEventListener(evento, função()) executa função() quando o evento passado por parametro acontece. */
-
-
-        /* The window object represents an open window in a browser.
-
-          If a document contain frames (<iframe> tags), the browser creates one window object for the HTML document, 
-          
-          and one additional window object for each frame. */
-
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-
-
-        var forms = document.getElementsByClassName('needs-validation');
-
-        /* When an HTML document is loaded into a web browser, it becomes a document object.
-
-        The document object is the root node of the HTML document. */
-
-        /* 
-
-         The element.getElementsByTagName() method returns a collection of an elements's child elements with the specified 
-        tag name, as a NodeList object. */
-
-        // Loop over them and prevent submission
-
-        var validation = Array.prototype.filter.call(forms, function (form) {
-
-
-          /* Quando queremos usar uma função que é usada com arrays, mas não temos um array para fazer "meuArray.filter.call()", usamos
-          Array.prototype().
-          
-          
-          The Object.prototype is on the top of the prototype inheritance (herança) chain.
-          ex: Array objects inherit from Array.prototype   
-          */
-
-
-          /* With the call() method, you can write a method that can be used on different objects. 
-          
-          ex:
-          var person = {
-            fullName: function() {
-            return this.firstName + " " + this.lastName;
-            }
-            }
-
-            var person1 = {
-            firstName:"John",
-            lastName: "Doe"
-            }
-            var person2 = {
-            firstName:"Mary",
-            lastName: "Doe"
-            }
-            person.fullName.call(person1);  // Will return "John Doe" 
-          
-          */
-
-          form.addEventListener('submit', function (event) {
-            let nameRegex = /(\s{2}|\d)|(\s$|^\s)|^\s*$/
-            let cepRegex = /\w/
-            //verifica se há dois espaços em branco seguidos, numeros, espaço em branco no final e no inicio, e se esta vazio
+            </div>
             
-              if (nameRegex.test(document.getElementById("validationCustom01").value) === true) {
+          </div>
 
-                cancelEvent(event, "validationCustom01")
-                document.getElementById("invalidName1").style.display = "block"
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="inputPassword" >Senha</label>
+                  <input type="password" class="form-control" id="inputPassword" maxlength="20" minlength="8" attr="none" aria-describedby="passwordHelp">
+                  <small id="passwordHelp" class="form-text text-muted">A senha deve conter pelo menos uma letra e número. Mínimo de 8 e máximo de 20 caracteres.</small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="inputConfirmPassword">Confirme sua senha</label>
+              <input type="password" class="form-control" id="inputConfirmPassword" attr="none" required>
 
-              }
-              if (nameRegex.test(document.getElementById("validationCustom02").value) === true) {
+      
+            </div>
+          </div>
 
-                cancelEvent(event, "validationCustom02")
-                document.getElementById("invalidName2").style.display = "block"
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="checkbox1" required>
+              <label class="form-check-label" for="checkbox1">
+                Eu concordo com os <a href="termsAndConditions.html">termos e condições</a>.
+              </label>
+              <div class="invalid-feedback" id="invalidCheck">
+                É preciso concordar com os termos e condições para prosseguir.
+              </div>
+            </div>
+          </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </div>
+        </div>
+      </form>
 
-              }
-              if (document.getElementById("estados").value == "") {
-
-                cancelEvent(event, "estados")
-
-              }
-
-              if (document.getElementById("cidades").value == "") {
-
-                cancelEvent(event, "cidades")
-
-              }
-
-              if (isCEP(document.getElementById("validationCustom05").value) == false ) {
-
-                cancelEvent(event, "validationCustom05")
-                document.getElementById("invalidCep").style.display = "block"
-
-              } 
-
-              if(document.getElementById("checkbox1").checked == false){
-                cancelEvent(event, "checkbox1")
-                document.getElementById("invalidCheck").style.display = "block"
-              }
-
-            //form.classList.add('was-validated');
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+  
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
           }, false);
-
-          /* The boolean param from addEventListener:  A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase.
-
-            Possible values:
-            true - The event handler is executed in the capturing phase
-            false- Default. The event handler is executed in the bubbling phase
-
-            https://javascript.info/bubbling-and-capturing
-
-             */
-
         });
       }, false);
-
-      function cancelEvent(event, id) {
-
-        /* CheckValidity() returns true if an input element contains valid data. */
-
-        event.preventDefault();
-
-        /* The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur. */
-
-        event.stopPropagation();
-
-        /* The stopPropagation() method prevents propagation of the same event from being called.
-        Propagation means bubbling up to parent elements or capturing down to child elements. */
-
-        document.getElementById("errorMsg").style.display = "block"
-
-        document.getElementById(id).setAttribute("attr", "invalid")
-      }
-
-      function trim(strTexto) {
-        // Substitúi os espaços vazios no inicio e no fim da string por vazio.
-        return strTexto.replace(/^s+|s+$/g, '');
-      }
-
-      // Função para validação de CEP.
-      function isCEP(strCEP) {
-        // Caso o CEP não esteja nesse formato ele é inválido!
-
-        while (strCEP.indexOf(" ") != -1) {
-          strCEP = strCEP.replace(" ", "")
-        }
-
-        let objER = /^[0-9]{8}$/;
-
-        if (objER.test(strCEP))
-          return true;
-        else
-          return false;
-      }
-
-    }
-
-    )()
-
-
-
-
-
-  </script>
-
-
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
-</body>
+    })();
+    </script>
 
 </html>
