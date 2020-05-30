@@ -1,91 +1,154 @@
 <!doctype html>
 <html lang="en">
-  <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="../css/signup.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Cadastro - RSCD</title>
-  </head>
-  <body>
-    <h1>Cadastro de Usuário</h1>
+  <link href="../css/signup.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 
-    <form class="needs-validation" novalidate>
-        <div class="form-row">
+  <title>Cadastro - RSCD</title>
+</head>
 
-            <div class="col-md-6 mb-3">
-                <label for="inputUserId">Nome de usuário</label>
-                <input type="text" class="form-control" id="inputUserId" attr="none" required maxlength="20" minlength="8">
-              </div>
-            <div class="col-md-6 mb-3">
-                <label for="inputEmail" >Email</label>
-                  <input type="email" class="form-control" id="inputEmail1" attr="none" maxlength="40">
+<body>
 
-            </div>
-            
-          </div>
 
-          <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="inputPassword" >Senha</label>
-                  <input type="password" class="form-control" id="inputPassword" maxlength="20" minlength="8" attr="none" aria-describedby="passwordHelp">
-                  <small id="passwordHelp" class="form-text text-muted">A senha deve conter pelo menos uma letra e número. Mínimo de 8 e máximo de 20 caracteres.</small>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="inputConfirmPassword">Confirme sua senha</label>
-              <input type="password" class="form-control" id="inputConfirmPassword" attr="none" required>
+  <h1>Cadastro de Usuário</h1>
 
-      
-            </div>
-          </div>
+  <div class="alert alert-danger" role="alert" id="errorMsg">
+    Erro! Dados inválidos.
+  </div>
 
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="checkbox1" required>
-              <label class="form-check-label" for="checkbox1">
-                Eu concordo com os <a href="termsAndConditions.html">termos e condições</a>.
-              </label>
-              <div class="invalid-feedback" id="invalidCheck">
-                É preciso concordar com os termos e condições para prosseguir.
-              </div>
-            </div>
-          </div>
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-          </div>
+  <form class="needs-validation" novalidate>
+    <div class="form-row">
+
+      <div class="col-md-6 mb-3">
+        <label for="inputUserId">Nome de usuário</label>
+        <input type="text" class="form-control" id="inputUserId" attr="none" maxlength="20" minlength="8">
+        <div class="invalid-feedback" id="invalidName1">
+          Por favor, sem espaços no final e no inicio do campo. Máximo de 20 e mínimo de 8 caracteres.
         </div>
-      </form>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" attr="none" maxlength="40">
+        <div class="invalid-feedback" id="invalidEmail">
+          Por favor, digite um email válido.
+        </div>
+      </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
-  
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-    </script>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="inputPassword">Senha</label>
+        <input type="password" class="form-control" id="inputPassword" maxlength="20" minlength="8" attr="none"
+          aria-describedby="passwordHelp">
+        <small id="passwordHelp" class="form-text text-muted">A senha deve conter pelo menos uma letra e número. Mínimo
+          de 8 e máximo de 20 caracteres.</small>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="inputConfirmPassword">Confirme sua senha</label>
+        <input type="password" class="form-control" id="inputConfirmPassword" attr="none" required>
+        <div class="invalid-feedback" id="invalidConfirmPassword">
+          Por favor, as senhas devem ser a mesma.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="checkbox1" required>
+        <label class="form-check-label" for="checkbox1">
+          Eu concordo com os <a href="termsAndConditions.html">termos e condições</a>.
+        </label>
+        <div class="invalid-feedback" id="invalidCheck">
+          É preciso concordar com os termos e condições para prosseguir.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+         let nameRegex = /(\s$|^\s)|(\s{2}|^\s*$)/
+
+         if (nameRegex.test(document.getElementById("inputUserId").value) === true) {
+          cancelEvent(event, "inputUserId")
+          document.getElementById("invalidName1").style.display = "block"
+
+          }
+
+          if(document.getElementById("inputPassword").value === ""){
+            cancelEvent(event, "inputPassword")
+    
+          } 
+
+          if(document.getElementById("inputConfirmPassword").value !== document.getElementById("inputPassword").value){
+            cancelEvent(event,"inputConfirmPassword")
+            document.getElementById("invalidConfirmPassword").style.display = "block"
+          }
+
+          if(!validateEmail(document.getElementById("inputEmail").value)  ){
+            cancelEvent(event,"inputEmail")
+            document.getElementById("invalidEmail").style.display="block"
+          }
+
+          if (document.getElementById("checkbox1").checked == false) {
+            cancelEvent(event, "checkbox1")
+            document.getElementById("invalidCheck").style.display = "block"
+          }
+        }, false);
+      });
+    }, false);
+
+    function cancelEvent(event, id) {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+      document.getElementById("errorMsg").style.display = "block"
+
+      document.getElementById(id).setAttribute("attr", "invalid")
+    }
+
+    function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+  }
+  )();
+</script>
 
 </html>

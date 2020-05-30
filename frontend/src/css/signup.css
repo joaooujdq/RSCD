@@ -14,8 +14,18 @@ input[attr="invalid"] {
 	border: 1px solid red;
 }
 
+input[attr="none"] {
+	border: 1px solid blue;
+}
+
+
 
 
 form{
     margin-top: 75px;
+}
+
+#errorMsg{
+    display: none;
+    margin-top: 40px;
 }

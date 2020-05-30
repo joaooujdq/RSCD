@@ -65,20 +65,20 @@
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationCustom05">CEP</label>
-        <input type="text" class="form-control" id="validationCustom05" attr="none" maxlength="8" minlength="8" required>
+        <input type="text" class="form-control" id="validationCustom05" attr="none" maxlength="8" minlength="8"
+          required>
         <div class="invalid-feedback" id="invalidCep">
           Por favor, digite o CEP usando apenas números.
         </div>
       </div>
     </div>
-    
+
     <h3>Currículo</h3>
     <button class="btn btn-primary" type="submit">Cadastrar</button>
   </form>
 
- 
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
@@ -144,77 +144,51 @@
 
       var validation = Array.prototype.filter.call(forms, function (form) {
 
+        /* The method document.getElementsByClassName return a HTMLCollection, in first look it similar to Array but HTMLCollection doesn't has methods .filter, .map, reduce, etc.
 
-        /* Quando queremos usar uma função que é usada com arrays, mas não temos um array para fazer "meuArray.filter.call()", usamos
-        Array.prototype().
-        
-        
-        The Object.prototype is on the top of the prototype inheritance (herança) chain.
-        ex: Array objects inherit from Array.prototype   
-        */
+        So for using these methods, we need to convert HTMLCollection to an array.
 
-
-        /* With the call() method, you can write a method that can be used on different objects. 
-        
-        ex:
-        var person = {
-          fullName: function() {
-          return this.firstName + " " + this.lastName;
-          }
-          }
-
-          var person1 = {
-          firstName:"John",
-          lastName: "Doe"
-          }
-          var person2 = {
-          firstName:"Mary",
-          lastName: "Doe"
-          }
-          person.fullName.call(person1);  // Will return "John Doe" 
-        
-        */
+        Or we can use, specific of javascript: Array.prototype.filter go by iterable on an object, and if you look in details on HTMLCollection what document.getElementsByClassName returns 
+        it has keys and it's iterable. So we can call method Array.prototype.filter.call( and pass as a context (first parameter) our HTMLCollection, second parameter will be a functions what
+        will be calls for each element in collection. */
 
         form.addEventListener('submit', function (event) {
           let nameRegex = /(\s{2}|\d)|(\s$|^\s)|^\s*$/
           let cepRegex = /\w/
           //verifica se há dois espaços em branco seguidos, numeros, espaço em branco no final e no inicio, e se esta vazio
+
+          if (nameRegex.test(document.getElementById("validationCustom01").value) === true) {
+
+            cancelEvent(event, "validationCustom01")
+            document.getElementById("invalidName1").style.display = "block"
+
+          }
+          if (nameRegex.test(document.getElementById("validationCustom02").value) === true) {
+
+            cancelEvent(event, "validationCustom02")
+            document.getElementById("invalidName2").style.display = "block"
+
+          }
+          if (document.getElementById("estados").value == "") {
+
+            cancelEvent(event, "estados")
+
+          }
+
+          if (document.getElementById("cidades").value == "") {
+
+            cancelEvent(event, "cidades")
+
+          }
+
+          if (isCEP(document.getElementById("validationCustom05").value) == false) {
+
+            cancelEvent(event, "validationCustom05")
+            document.getElementById("invalidCep").style.display = "block"
+
+          }
+
           
-            if (nameRegex.test(document.getElementById("validationCustom01").value) === true) {
-
-              cancelEvent(event, "validationCustom01")
-              document.getElementById("invalidName1").style.display = "block"
-
-            }
-            if (nameRegex.test(document.getElementById("validationCustom02").value) === true) {
-
-              cancelEvent(event, "validationCustom02")
-              document.getElementById("invalidName2").style.display = "block"
-
-            }
-            if (document.getElementById("estados").value == "") {
-
-              cancelEvent(event, "estados")
-
-            }
-
-            if (document.getElementById("cidades").value == "") {
-
-              cancelEvent(event, "cidades")
-
-            }
-
-            if (isCEP(document.getElementById("validationCustom05").value) == false ) {
-
-              cancelEvent(event, "validationCustom05")
-              document.getElementById("invalidCep").style.display = "block"
-
-            } 
-
-            if(document.getElementById("checkbox1").checked == false){
-              cancelEvent(event, "checkbox1")
-              document.getElementById("invalidCheck").style.display = "block"
-            }
 
           //form.classList.add('was-validated');
 
