@@ -21,7 +21,7 @@
 
 <body>
 
-  <h1> Cadastro de Desenvolvedor</h1>
+  <h1> Cadastro de Currículo</h1>
   <h2> Informações Pessoais</h2>
 
   <div class="alert alert-danger" role="alert" id="errorMsg">
@@ -32,7 +32,7 @@
     <div class="form-row">
       <div class="col-md-6 mb-3">
 
-        <label for="validationCustom01">Primeiro nome</label>
+        <label for="validationCustom01">Nome Completo</label>
         <input type="text" class="form-control" id="validationCustom01" attr="none" required>
         <div class="invalid-feedback" id="invalidName1">
           Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
@@ -41,13 +41,20 @@
 
       </div>
       <div class="col-md-6 mb-3">
-        <label for="validationCustom02">Sobrenome</label>
-        <input type="text" class="form-control" id="validationCustom02" attr="none" required>
-        <div class="invalid-feedback" id="invalidName2">
-          Por favor, digite apenas letras, sem espaços no final e no inicio do campo.
-        </div>
 
+        <label for="inputDDD"> Telefone com DDD </label>
+        <div class="input-group mb-3">
+          
+          <div class="form-group col-md-2">
+            <input type="text" class="form-control" id="inputDDD" placeholder="DDD" minlength="2" maxlength="2" attr="none"required >
+            
+          </div>
+          <input type="text" class="form-control" placeholder="Telefone" aria-label="Username" aria-describedby="basic-addon1" id="inputTelefone" minlength="9" maxlength="9" attr="none" required>
+        
+        </div>
+        
       </div>
+      
     </div>
     <div class="form-row">
       <div class="col-md-6 mb-3">
@@ -74,6 +81,16 @@
     </div>
 
     <h3>Currículo</h3>
+    
+
+    <div class="media">
+      <img src="../../assets/img/favicons/emptyProfilePicture.jpg" class="align-self-start mr-3" alt="Vai ter uma imagem aqui">
+      <div class="media-body">
+        <input type="text" class="form-control" id="inputNamePort" attr="none" placeholder="Nome" required>
+        <textarea class="form-control" aria-label="With textarea" placeholder="Sobre mim..." id="inputTextAreaPort"></textarea>
+      </div>
+    </div>
+
     <button class="btn btn-primary" type="submit">Cadastrar</button>
   </form>
 
@@ -154,19 +171,12 @@
 
         form.addEventListener('submit', function (event) {
           let nameRegex = /(\s{2}|\d)|(\s$|^\s)|^\s*$/
-          let cepRegex = /\w/
           //verifica se há dois espaços em branco seguidos, numeros, espaço em branco no final e no inicio, e se esta vazio
 
           if (nameRegex.test(document.getElementById("validationCustom01").value) === true) {
 
             cancelEvent(event, "validationCustom01")
             document.getElementById("invalidName1").style.display = "block"
-
-          }
-          if (nameRegex.test(document.getElementById("validationCustom02").value) === true) {
-
-            cancelEvent(event, "validationCustom02")
-            document.getElementById("invalidName2").style.display = "block"
 
           }
           if (document.getElementById("estados").value == "") {
@@ -181,10 +191,20 @@
 
           }
 
-          if (isCEP(document.getElementById("validationCustom05").value) == false) {
+          if (!isCEP(document.getElementById("validationCustom05").value)) {
 
             cancelEvent(event, "validationCustom05")
             document.getElementById("invalidCep").style.display = "block"
+
+          }
+
+          if(!isTelNumber(document.getElementById("inputTelefone").value, document.getElementById("inputDDD").value)){
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById("errorMsg").style.display = "block"
+
+            document.getElementById("inputTelefone").setAttribute("attr", "invalid")
+            document.getElementById("inputDDD").setAttribute("attr", "invalid")
 
           }
 
@@ -225,11 +245,6 @@
       document.getElementById(id).setAttribute("attr", "invalid")
     }
 
-    function trim(strTexto) {
-      // Substitúi os espaços vazios no inicio e no fim da string por vazio.
-      return strTexto.replace(/^s+|s+$/g, '');
-    }
-
     // Função para validação de CEP.
     function isCEP(strCEP) {
       // Caso o CEP não esteja nesse formato ele é inválido!
@@ -238,15 +253,21 @@
         strCEP = strCEP.replace(" ", "")
       }
 
-      let objER = /^[0-9]{8}$/;
-
-      if (objER.test(strCEP))
-        return true;
-      else
-        return false;
+      return /^[0-9]{8}$/.test(strCEP)
     }
 
+    function isTelNumber(strTel, strDDD){
+      while (strTel.indexOf(" ") != -1) {
+        strTel = strTel.replace(" ", "")
+      }
+      while(strDDD.indexOf(" ")!= -1){
+        strDDD = strDDD.replace(" ", "")
+      }
+      return (/^[0-9]{9}$/.test(strTel) && /^[0-9]{2}$/.test(strDDD))
+  } 
+
   }
+  
 
   )()
 
